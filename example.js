@@ -2,13 +2,13 @@
 var couchInit = require('./lib/couch-init.js');
 var couchUrl = process.argv[2];
 var couchConfig = {
-    httpd: {
-        enable_cors: 'true'
-    },
-    cors: {
-        origins: '*',
-        credentials: 'true'
-    }
+	httpd: {
+		enable_cors: 'true'
+	},
+	cors: {
+		origins: '*',
+		credentials: 'true'
+	}
 };
 var couchDatabases = ['presentations'];
 
