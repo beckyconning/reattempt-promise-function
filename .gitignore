@@ -1,0 +1,9 @@
+node_modules
+logs
+*.log
+pids
+*.pid
+*.seed
+.grunt
+*.dump
+*.swp
