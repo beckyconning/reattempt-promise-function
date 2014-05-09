@@ -31,11 +31,11 @@ describe('couch-init', function() {
 		it('should update the couchdb configuration for each option in the provided configuration', function(done) {
 			var configuration = {
 				httpd: {
-				    enable_cors: 'true'
+					enable_cors: 'true'
 				},  
 				cors: {
-				    origins: '*',
-				    credentials: 'false'
+					origins: '*',
+					credentials: 'false'
 				}   
 			};		
 			var expectedConfigOptions = {
