@@ -46,7 +46,7 @@ describe('couch-init', function() {
 			var expectedConfigOptions = {
 				"http://example.com/_config/httpd/enable_cors": "true",
 				"http://example.com/_config/cors/origins": "*",
-				"http://example.com/_config/cors/credentials": "false",
+				"http://example.com/_config/cors/credentials": "false"
 			};
 
 			var expectRequestsToHaveBeenMadeCorrectlyForEachOption = function() {
