@@ -1,35 +1,35 @@
 {
-	"name": "couch-init",
-	"preferGlobal": false,
-	"version": "0.0.1",
-	"author": "Antwerp House Software Co-operative <hi@antwerphouse.coop>",
-	"description": "Module that provides couchdb initialisation and configuration methods",
-	"contributors": [
-		{
-			"name": "Becky Conning",
-			"email": "becky.conning@icloud.com"
-		}
-	],
-	"scripts": {},
-	"main": "index.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/beckyconning/couch-init"
-	},
-	"keywords": [
-		"couchdb"
-	],
-	"dependencies": {
-		"request-promise": "*",
-		"q": "*",
-		"async": "*"
-	},
-	"analyze": true,
-	"devDependencies": {
-		"jasmine-node": "*",
-		"proxyquire": "*"
-	},
-	"bundledDependencies": [],
-	"license": "MIT"
+  "name": "couch-init",
+  "preferGlobal": false,
+  "version": "0.0.1",
+  "author": "Antwerp House Software Co-operative <hi@antwerphouse.coop>",
+  "description": "Module that provides couchdb initialisation and configuration methods",
+  "contributors": [
+    {
+      "name": "Becky Conning",
+      "email": "becky.conning@icloud.com"
+    }
+  ],
+  "scripts": {},
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beckyconning/couch-init"
+  },
+  "keywords": [
+    "couchdb"
+  ],
+  "dependencies": {
+    "request-promise": "*",
+    "q": "*",
+    "async": "*"
+  },
+  "analyze": true,
+  "devDependencies": {
+    "jasmine-node": "*",
+    "proxyquire": "*"
+  },
+  "bundledDependencies": [],
+  "license": "MIT"
 }
 
