@@ -1,3 +1,8 @@
+// should the it tests have more technical descriptions? 
+// is it important to test graceful responses to invalid arguments if you are using promises?
+// anthing else?
+// thanks! : )
+
 describe('couch-init', function() {
 	var couchInit;
 	var requestPromise;
