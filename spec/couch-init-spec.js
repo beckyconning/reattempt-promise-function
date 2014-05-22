@@ -1,13 +1,9 @@
-// should the it tests have more technical descriptions? 
-// is it important to test graceful responses to invalid arguments if you are using promises?
-// anthing else?
-// thanks! : )
-
 describe('couch-init', function() {
     var couchInit;
     var requestPromise;
-    var requestDeferreds;
-    var flushRequests;
+    var requests;
+    var resolveRequests;
+    var rejectRequests;
     var RSVP = require('rsvp');
     var proxyquire = require('proxyquire');
     var couchUrl = "http://example.com";
@@ -15,12 +11,12 @@ describe('couch-init', function() {
     // create and spy on request-promise mock
     beforeEach(function() {
         var mock = {};
-        requestDeferreds = [];
+        requests = [];
 
         // mock requestPromise
         mock.requestPromise = function() {
             requestDeferred = RSVP.defer();
-            requestDeferreds.push(requestDeferred);
+            requests.push(requestDeferred);
             return requestDeferred.promise;
         }; 
 
@@ -28,11 +24,17 @@ describe('couch-init', function() {
         spyOn(mock, 'requestPromise').andCallThrough();
         requestPromise = mock.requestPromise;
 
-        // helper method to complete mock requests 
-        flushRequests = function() {
-            requestDeferreds.forEach(function(deferred) {
-                deferred.resolve('Couch response');
-            });
+        // helper methods to settle mock requests 
+        resolveRequests = function(requests) { 
+            if(requests.length > 0)
+                requests.pop().resolve('Couchdb response');
+            else return requests;
+        };
+
+        rejectRequests = function(requests) { 
+            if(requests.length > 0)
+                requests.pop().reject(0); // http unreachable
+            else return requests;
         };
 
         // instantiate a couch-init with overridden dependencies
@@ -80,26 +82,66 @@ describe('couch-init', function() {
                 expect(requestPromise).toHaveBeenCalledWith(expectedRequestOptions);
             });
 
-            flushRequests();
+            resolveRequests(requests);
             done();
         }); 
     });
 
-    //describe('waitForCouch', function() {
-    //    it('should return a promise', funciton() {
-    //        var promise = couchInit.waitForCouch(couchUrl);
-    //        expect(promise.then).toBeDefined();
-    //    });    
+    describe('waitForCouch', function() {
+        it('should return a promise', function() {
+            var promise = couchInit.waitForCouch(couchUrl);
+            expect(promise.then).toBeDefined();
+        });    
 
-    //    it('should not resolve the promise until couch is available', function(done) {
+        it('should try to get couch info the supplied number of times', function(done) {
+            var timeout = 1;
+            var attempts = 3;
+            var expectedRequestOptions = {
+                url: couchUrl,
+                method: 'GET'
+            };
 
-    //        // call the method
-    //        couchInit.waitForCouch(couchUrl)
-    //            .then(expectRequestsToHaveBeenMadeCorrectlyForEachDatabaseName)
-    //            .then(done)
-    //            .catch(console.error.bind(console));
-    //    });
-    //});
+            var expectCouchInfoToHaveBeenRequestedThisManyTimes = function expectCouchInfoToHaveBeenRequestedThisManyTimes(times) {
+                console.log();
+                if (times > 0) {
+                    expect(requestPromise.calls[times - 1].args[0]).toEqual(expectedRequestOptions);
+                    expectCouchInfoToHaveBeenRequestedThisManyTimes(times - 1); 
+                }
+                else return true;
+            };
+ 
+            couchInit.waitForCouch(couchUrl, timeout, attempts)
+                .then(null, function() {
+                    expect(requestPromise.calls.length).toEqual(attempts);
+                    expectCouchInfoToHaveBeenRequestedThisManyTimes(attempts);
+                })
+                .then(done)
+                .catch(console.error.bind(console));
+            
+            rejectRequests(requests);
+        });
+
+        it('it should wait the supplied timeout between attempts', function(done) {
+            var timeout = 25;
+            var attempts = 2;
+
+            jasmine.Clock.useMock() 
+           
+            couchInit.waitForCouch(couchUrl, timeout, attempts)
+                .catch(console.error.bind(console));
+            
+            // flush first request
+            rejectRequests(requests.splice(0,1));
+
+            expect(requestPromise.calls.length).toEqual(1);
+
+            jasmine.Clock.tick(timeout);
+
+            expect(requestPromise.calls.length).toEqual(2);
+
+            done();
+        });
+    });
 
     describe('createDatabases', function() {
         it('should return a promise', function() {
@@ -119,13 +161,13 @@ describe('couch-init', function() {
             databaseNames.forEach(function(databaseName) {
                 var expectedRequestOptions = {
                     url: couchUrl + '/' + databaseName,
-                    method: 'PUT',
+                    method: 'PUT'
                 };
                 expect(requestPromise).toHaveBeenCalledWith(expectedRequestOptions);
             });
 
             // flush the request
-            flushRequests();
+            resolveRequests(requests);
 
 	    done();
         });
