@@ -1,7 +1,7 @@
 {
   "name": "couch-init",
   "preferGlobal": false,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Antwerp House Software Co-operative <hi@antwerphouse.coop>",
   "description": "Module that provides couchdb initialisation and configuration methods",
   "contributors": [
@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "request-promise": "*",
-    "rsvp": "*",
+    "q": "*",
     "async": "*"
   },
   "analyze": true,
@@ -32,4 +32,3 @@
   "bundledDependencies": [],
   "license": "MIT"
 }
-

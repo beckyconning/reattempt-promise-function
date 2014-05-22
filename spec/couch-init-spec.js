@@ -4,7 +4,7 @@ describe('couch-init', function() {
     var requests;
     var resolveRequests;
     var rejectRequests;
-    var RSVP = require('rsvp');
+    var Q = require('q');
     var proxyquire = require('proxyquire');
     var couchUrl = "http://example.com";
 
@@ -15,7 +15,7 @@ describe('couch-init', function() {
 
         // mock requestPromise
         mock.requestPromise = function() {
-            requestDeferred = RSVP.defer();
+            requestDeferred = Q.defer();
             requests.push(requestDeferred);
             return requestDeferred.promise;
         }; 
@@ -26,15 +26,19 @@ describe('couch-init', function() {
 
         // helper methods to settle mock requests 
         resolveRequests = function(requests) { 
-            if(requests.length > 0)
+            if (requests.length > 0) {
                 requests.pop().resolve('Couchdb response');
-            else return requests;
+                resolveRequests(requests);
+            }
+            else return true;
         };
 
         rejectRequests = function(requests) { 
-            if(requests.length > 0)
+            if (requests.length > 0) {
                 requests.pop().reject(0); // http unreachable
-            else return requests;
+                rejectRequests(requests);
+            }
+            else return true; 
         };
 
         // instantiate a couch-init with overridden dependencies
@@ -82,65 +86,66 @@ describe('couch-init', function() {
                 expect(requestPromise).toHaveBeenCalledWith(expectedRequestOptions);
             });
 
-            resolveRequests(requests);
             done();
         }); 
     });
 
-    describe('waitForCouch', function() {
+    describe('waitForStart', function() {
         it('should return a promise', function() {
-            var promise = couchInit.waitForCouch(couchUrl);
+            var promise = couchInit.waitForStart(couchUrl);
             expect(promise.then).toBeDefined();
         });    
 
         it('should try to get couch info the supplied number of times', function(done) {
-            var timeout = 1;
+            var delay = 0;
             var attempts = 3;
             var expectedRequestOptions = {
                 url: couchUrl,
                 method: 'GET'
             };
 
-            var expectCouchInfoToHaveBeenRequestedThisManyTimes = function expectCouchInfoToHaveBeenRequestedThisManyTimes(times) {
-                console.log();
-                if (times > 0) {
-                    expect(requestPromise.calls[times - 1].args[0]).toEqual(expectedRequestOptions);
-                    expectCouchInfoToHaveBeenRequestedThisManyTimes(times - 1); 
-                }
-                else return true;
+            var expectCorrectRequests = function() {
+                expect(requestPromise.calls.length).toEqual(3); 
+                expect(requestPromise.calls[0].args[0]).toEqual(expectedRequestOptions);
+                expect(requestPromise.calls[1].args[0]).toEqual(expectedRequestOptions);
+                expect(requestPromise.calls[2].args[0]).toEqual(expectedRequestOptions);
+            };
+
+            var rejectNextRequest = function() {
+                rejectRequests(requests);
             };
  
-            couchInit.waitForCouch(couchUrl, timeout, attempts)
-                .then(null, function() {
-                    expect(requestPromise.calls.length).toEqual(attempts);
-                    expectCouchInfoToHaveBeenRequestedThisManyTimes(attempts);
-                })
+            couchInit.waitForStart(couchUrl, delay, attempts)
+                .then(null, expectCorrectRequests, rejectNextRequest)
                 .then(done)
                 .catch(console.error.bind(console));
-            
+
             rejectRequests(requests);
+
+            rejectNextRequest();
         });
 
-        it('it should wait the supplied timeout between attempts', function(done) {
-            var timeout = 25;
+        it('it should wait the supplied delay between attempts', function(done) {
+            var delay = 25;
             var attempts = 2;
+            var timeBeforeRequest = new Date().getTime();
 
-            jasmine.Clock.useMock() 
-           
-            couchInit.waitForCouch(couchUrl, timeout, attempts)
+            var expectDelayAndRejectNextRequest = function() {
+                var timeAfterRequest = new Date().getTime();
+                var timeDifference = timeAfterRequest - timeBeforeRequest; 
+                expect(timeDifference).toBeGreaterThan(delay - 1);
+                expect(timeDifference).toBeLessThan(delay + 100);
+                timeBeforeRequest = timeAfterRequest;
+                rejectRequests(requests);
+            };
+
+            couchInit.waitForStart(couchUrl, delay, attempts)
+                .then(null, done, expectDelayAndRejectNextRequest)
                 .catch(console.error.bind(console));
-            
-            // flush first request
-            rejectRequests(requests.splice(0,1));
 
-            expect(requestPromise.calls.length).toEqual(1);
+            rejectRequests(requests);
 
-            jasmine.Clock.tick(timeout);
-
-            expect(requestPromise.calls.length).toEqual(2);
-
-            done();
-        });
+        });            
     });
 
     describe('createDatabases', function() {
@@ -165,9 +170,6 @@ describe('couch-init', function() {
                 };
                 expect(requestPromise).toHaveBeenCalledWith(expectedRequestOptions);
             });
-
-            // flush the request
-            resolveRequests(requests);
 
 	    done();
         });
