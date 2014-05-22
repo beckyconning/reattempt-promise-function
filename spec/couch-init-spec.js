@@ -64,26 +64,24 @@ describe('couch-init', function() {
                 "http://example.com/_config/cors/credentials": "false"
             };
 
-            var expectRequestsToHaveBeenMadeCorrectlyForEachOption = function() {
-                Object.keys(expectedConfigOptions).forEach(function(optionUrl) {
-                    var optionValue = expectedConfigOptions[optionUrl];
-                    var expectedRequestOptions = {
-                        url: optionUrl,
-                        method: 'PUT',
-                        json: true,
-                        body: JSON.stringify(optionValue)
-                    };
-                    expect(requestPromise).toHaveBeenCalledWith(expectedRequestOptions);
-                });
-            };
-
             // call the method
             couchInit.configure(couchUrl, configuration)
-                .then(expectRequestsToHaveBeenMadeCorrectlyForEachOption)
-                .then(done)
                 .catch(console.error.bind(console));         
 
+            // expect a request for each option
+            Object.keys(expectedConfigOptions).forEach(function(optionUrl) {
+                var optionValue = expectedConfigOptions[optionUrl];
+                var expectedRequestOptions = {
+                    url: optionUrl,
+                    method: 'PUT',
+                    json: true,
+                    body: JSON.stringify(optionValue)
+                };
+                expect(requestPromise).toHaveBeenCalledWith(expectedRequestOptions);
+            });
+
             flushRequests();
+            done();
         }); 
     });
 
@@ -94,18 +92,9 @@ describe('couch-init', function() {
     //    });    
 
     //    it('should not resolve the promise until couch is available', function(done) {
-    //        var expectRequestsToHaveBeenMadeCorrectlyForEachDatabaseName = function() {
-    //            databaseNames.forEach(function(databaseName) {
-    //                var expectedRequestOptions = {
-    //                    url: couchUrl,
-    //                    method: 'GET',
-    //                };
-    //                expect(requestPromise).toHaveBeenCalledWith(expectedRequestOptions);
-    //            });
-    //        };
 
     //        // call the method
-    //        couchInit.createDatabases(couchUrl, databaseNames)
+    //        couchInit.waitForCouch(couchUrl)
     //            .then(expectRequestsToHaveBeenMadeCorrectlyForEachDatabaseName)
     //            .then(done)
     //            .catch(console.error.bind(console));
@@ -122,24 +111,23 @@ describe('couch-init', function() {
         it('should create a couchdb database for each database name in the provided array', function(done) {
             var databaseNames = ['database1', 'database2', 'database3'];
 
-            var expectRequestsToHaveBeenMadeCorrectlyForEachDatabaseName = function() {
-                databaseNames.forEach(function(databaseName) {
-                    var expectedRequestOptions = {
-                        url: couchUrl + '/' + databaseName,
-                        method: 'PUT',
-                    };
-                    expect(requestPromise).toHaveBeenCalledWith(expectedRequestOptions);
-                });
-            };
-
             // call the method
             couchInit.createDatabases(couchUrl, databaseNames)
-                .then(expectRequestsToHaveBeenMadeCorrectlyForEachDatabaseName)
-                .then(done)
                 .catch(console.error.bind(console));
+
+            // expect a request for each database
+            databaseNames.forEach(function(databaseName) {
+                var expectedRequestOptions = {
+                    url: couchUrl + '/' + databaseName,
+                    method: 'PUT',
+                };
+                expect(requestPromise).toHaveBeenCalledWith(expectedRequestOptions);
+            });
 
             // flush the request
             flushRequests();
+
+	    done();
         });
     });
 
