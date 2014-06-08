@@ -21,11 +21,12 @@
   ],
   "dependencies": {
     "request-promise": "*",
-    "q": "*",
+    "bluebird": "*",
     "async": "*"
   },
   "analyze": true,
   "devDependencies": {
+    "underscore": "*",
     "jasmine-node": "*",
     "proxyquire": "*"
   },
