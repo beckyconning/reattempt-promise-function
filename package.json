@@ -1,7 +1,7 @@
 {
   "name": "couch-init",
   "preferGlobal": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Antwerp House Software Co-operative <hi@antwerphouse.coop>",
   "description": "Module that provides couchdb initialisation and configuration methods",
   "contributors": [
