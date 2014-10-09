@@ -15,8 +15,8 @@ describe('couch-init', function() {
         var mock = {};
         requestDeferreds = [];
         requestPromises = [];
-	resolveRequestsInstantly = false;
-	rejectRequestsInstantly = false;
+    	resolveRequestsInstantly = false;
+    	rejectRequestsInstantly = false;
 
         // mock requestPromise
         mock.requestPromise = function() {
@@ -28,7 +28,7 @@ describe('couch-init', function() {
             requestDeferreds.push(requestDeferred);
             requestPromises.push(requestDeferred.promise);
             return requestDeferred.promise;
-        }; 
+        };
 
         // spy on mock requestPromise
         spyOn(mock, 'requestPromise').and.callThrough();
@@ -87,7 +87,21 @@ describe('couch-init', function() {
         it('should return a promise', function() {
             var promise = couchInit.waitForStart(couchUrl);
             expect(promise.then).toBeDefined();
-        });    
+        });
+
+        it('should resolve when it gets couch info', function(done) {
+            var delay = 5;
+            var attempts = 1;
+
+	        resolveRequestsInstantly = true;
+
+            couchInit.waitForStart(couchUrl, delay, attempts)
+                .then(function () {
+                    done();
+                })
+                .catch(console.error.bind(console));
+
+        });
 
         it('should try to get couch info the supplied number of times', function(done) {
             var delay = 5;
@@ -98,18 +112,18 @@ describe('couch-init', function() {
             };
 
             var expectCorrectRequests = function() {
-                expect(requestPromise.calls.count()).toEqual(attempts); 
+                expect(requestPromise.calls.count()).toEqual(attempts);
 
                 _.times(attempts, function(attemptIndex) {
                     expect(requestPromise.calls.argsFor(attemptIndex))
                         .toEqual([expectedRequestOptions]);
                 });
 
-		done();
+		        done();
             };
 
-	    rejectRequestsInstantly = true;
- 
+	        rejectRequestsInstantly = true;
+
             couchInit.waitForStart(couchUrl, delay, attempts)
                 .then(null, expectCorrectRequests)
                 .catch(console.error.bind(console));
