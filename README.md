@@ -9,7 +9,7 @@ Use <code>make test</code> to run the unit tests.
 ## Quick start
 <code>npm install https://github.com/beckyconning/couch-init --save-dev</code>
 
-<code>require('node-init');</code>
+<code>require('couch-init');</code>
     
 ## Use    
 See the example.js for uses
