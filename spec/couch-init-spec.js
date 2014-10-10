@@ -1,4 +1,4 @@
-describe('couch-init', function() {
+describe('couch-init', function () {
     var couchInit;
     var requestPromise;
     var requestDeferreds;
@@ -11,7 +11,7 @@ describe('couch-init', function() {
     var couchUrl = "http://example.com";
 
     // create and spy on request-promise mock
-    beforeEach(function() {
+    beforeEach(function () {
         var mock = {};
         requestDeferreds = [];
         requestPromises = [];
@@ -19,7 +19,7 @@ describe('couch-init', function() {
     	rejectRequestsInstantly = false;
 
         // mock requestPromise
-        mock.requestPromise = function() {
+        mock.requestPromise = function () {
             requestDeferred = Promise.defer();
 
 	    if (resolveRequestsInstantly) requestDeferred.resolve();
@@ -36,27 +36,27 @@ describe('couch-init', function() {
 
         // instantiate a couch-init with overridden dependencies
         couchInit = proxyquire('../lib/couch-init', {
-            'request-promise': requestPromise 
+            'request-promise': requestPromise
         });
     });
 
-    describe('configure', function() {
-        it('should return a promise', function() {
+    describe('configure', function () {
+        it('should return a promise', function () {
             var configuration = {};
             var promise = couchInit.configure(couchUrl, configuration);
             expect(promise.then).toBeDefined();
         });
 
-        it('should update the couchdb configuration for each option in the provided configuration', function(done) {
+        it('should update the couchdb configuration for each option in the provided configuration', function (done) {
             var configuration = {
                 httpd: {
                     enable_cors: 'true'
-                },    
+                },
                 cors: {
                     origins: '*',
                     credentials: 'false'
-                }     
-            };        
+                }
+            };
             var expectedConfigOptions = {
                 "http://example.com/_config/httpd/enable_cors": "true",
                 "http://example.com/_config/cors/origins": "*",
@@ -65,10 +65,10 @@ describe('couch-init', function() {
 
             // call the method
             couchInit.configure(couchUrl, configuration)
-                .catch(console.error.bind(console));         
+                .catch(console.error.bind(console));
 
             // expect a request for each option
-            Object.keys(expectedConfigOptions).forEach(function(optionUrl) {
+            Object.keys(expectedConfigOptions).forEach(function (optionUrl) {
                 var optionValue = expectedConfigOptions[optionUrl];
                 var expectedRequestOptions = {
                     url: optionUrl,
@@ -80,16 +80,16 @@ describe('couch-init', function() {
             });
 
             done();
-        }); 
+        });
     });
 
-    describe('waitForStart', function() {
-        it('should return a promise', function() {
+    describe('waitForStart', function () {
+        it('should return a promise', function () {
             var promise = couchInit.waitForStart(couchUrl);
             expect(promise.then).toBeDefined();
         });
 
-        it('should resolve when it gets couch info', function(done) {
+        it('should resolve when it gets couch info', function (done) {
             var delay = 5;
             var attempts = 1;
 
@@ -103,7 +103,7 @@ describe('couch-init', function() {
 
         });
 
-        it('should try to get couch info the supplied number of times', function(done) {
+        it('should try to get couch info the supplied number of times', function (done) {
             var delay = 5;
             var attempts = 3;
             var expectedRequestOptions = {
@@ -111,10 +111,10 @@ describe('couch-init', function() {
                 method: 'GET'
             };
 
-            var expectCorrectRequests = function() {
+            var expectCorrectRequests = function () {
                 expect(requestPromise.calls.count()).toEqual(attempts);
 
-                _.times(attempts, function(attemptIndex) {
+                _.times(attempts, function (attemptIndex) {
                     expect(requestPromise.calls.argsFor(attemptIndex))
                         .toEqual([expectedRequestOptions]);
                 });
@@ -129,7 +129,7 @@ describe('couch-init', function() {
                 .catch(console.error.bind(console));
         });
 
-        it('it should wait the supplied delay between attempts', function(done) {
+        it('it should wait the supplied delay between attempts', function (done) {
             var delay = 10;
             var attempts = 2;
             var timeBeforeSecondRequest;
@@ -138,7 +138,7 @@ describe('couch-init', function() {
             rejectRequestsInstantly = true;
 
             couchInit.waitForStart(couchUrl, delay, attempts)
-                .then(null, function() {
+                .then(null, function () {
                     var timeAfterSecondRequest = new Date().getTime();
                     var timeDifference = timeAfterSecondRequest - timeBeforeSecondRequest;
                     expect(timeDifference).toBeGreaterThan(delay - 1);
@@ -148,17 +148,17 @@ describe('couch-init', function() {
                 .catch(console.error.bind(console));
 
             timeBeforeSecondRequest = new Date().getTime();
-        });            
+        });
     });
 
-    describe('createDatabases', function() {
-        it('should return a promise', function() {
+    describe('createDatabases', function () {
+        it('should return a promise', function () {
             var configuration = {};
             var promise = couchInit.createDatabases(couchUrl, configuration);
             expect(promise.then).toBeDefined();
-        });    
+        });
 
-        it('should create a couchdb database for each database name in the provided array', function(done) {
+        it('should create a couchdb database for each database name in the provided array', function (done) {
             var databaseNames = ['database1', 'database2', 'database3'];
 
             // call the method
@@ -166,7 +166,7 @@ describe('couch-init', function() {
                 .catch(console.error.bind(console));
 
             // expect a request for each database
-            databaseNames.forEach(function(databaseName) {
+            databaseNames.forEach(function (databaseName) {
                 var expectedRequestOptions = {
                     url: couchUrl + '/' + databaseName,
                     method: 'PUT'
