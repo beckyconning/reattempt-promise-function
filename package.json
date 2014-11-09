@@ -2,27 +2,29 @@
   "name": "couch-init",
   "preferGlobal": false,
   "version": "0.0.3",
-  "author": "Antwerp House Software Co-operative <hi@antwerphouse.coop>",
-  "description": "Module that provides couchdb initialisation and configuration methods",
+  "author": "Software Co-operative Ltd <becky.conning@icloud.com>",
+  "description": "Repeatedly reattempt calls to functions that return promises.",
   "contributors": [
     {
       "name": "Becky Conning",
       "email": "becky.conning@icloud.com"
     }
   ],
-  "scripts": {},
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine-node --verbose ./spec/reattempt-spec.js"
+  },
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/beckyconning/couch-init"
+    "url": "https://github.com/beckyconning/reattempt-promise-function"
   },
   "keywords": [
-    "couchdb"
+    "promise",
+    "gulp"
   ],
   "dependencies": {
-    "async": "^0.9.0",
-    "bluebird": "^2.3.5",
-    "request-promise": "^0.2.1"
+    "bluebird": "^2.3.11",
+    "tcomb": "^0.3.2"
   },
   "analyze": true,
   "devDependencies": {
