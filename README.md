@@ -24,7 +24,8 @@ var requestOptions = { 'method': 'GET', 'uri': uri };
 // Attempt http get request 10 times with a 250ms delay between attmpts
 reattempt(requestPromise, [requestOptions], 250, 10)
     .then(function (response) {
-        console.log('`'uri + '` ' is now available.');
+        console.log('`'uri + '` ' is now available.')
+    })
     .catch(function (error) {
         console.log('Couldn't connect to `' + uri '`');
     });
