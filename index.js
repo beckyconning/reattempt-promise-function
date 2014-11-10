@@ -1,1 +1,1 @@
-module.exports = require('./lib/couch-init');
+module.exports = require('./src/reattempt-promise-function');
