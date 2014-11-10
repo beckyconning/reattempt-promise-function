@@ -1,7 +1,7 @@
 {
-  "name": "couch-init",
+  "name": "reattempt-promise-function",
   "preferGlobal": false,
-  "version": "0.0.3",
+  "version": "0.0.1",
   "author": "Software Co-operative Ltd <becky.conning@icloud.com>",
   "description": "Repeatedly attempt calls to functions that return promises.",
   "contributors": [
