@@ -3,7 +3,7 @@
   "preferGlobal": false,
   "version": "0.0.1",
   "author": "Software Co-operative Ltd <becky.conning@icloud.com>",
-  "description": "Repeatedly attempt calls to functions that return promises.",
+  "description": "Reattempt function calls that return promises when those promises reject.",
   "contributors": [
     {
       "name": "Becky Conning",
