@@ -27,7 +27,7 @@ reattempt(requestPromise, [requestOptions], 250, 10)
         console.log('`' + uri + '` is now available.')
     })
     .catch(function (error) {
-        console.log('Couldn\'t connect to `' + uri '`');
+        console.log('Couldn\'t connect to `' + uri '`.');
     });
 ```
 
