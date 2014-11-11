@@ -8,7 +8,8 @@ is rejected. You can specify the delay between attempts and the maximum number
 of attempts.
 
 Perfect for waiting for services to start during Gulp and Grunt build and test
-task.
+tasks or attempting to reconnect to an application backend after becoming
+disconnected.
 
 ## Quickstart
 
