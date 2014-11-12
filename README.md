@@ -1,11 +1,15 @@
 reattempt-promise-function
 ==========================
 
-Calls a function that returns a promise repeatedly until it resolves. You may
-specify the delay between attempts and the maximum number of attempts.
+`reattempt-promise-function` allows you to easily reattempt async actions.
+
+It does this by re-calling a function that returns a promise when that promise 
+is rejected. You can specify the delay between attempts and the maximum number
+of attempts.
 
 Perfect for waiting for services to start during Gulp and Grunt build and test
-tasks.
+tasks or attempting to reconnect to an application backend after becoming
+disconnected.
 
 ## Quickstart
 
