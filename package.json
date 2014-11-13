@@ -11,6 +11,7 @@
     }
   ],
   "scripts": {
+    "build": "./node_modules/browserify/bin/cmd.js ./src/reattempt-promise-function.js --standalone reattempt > ./bundle.js",
     "test": "./node_modules/.bin/jasmine-node --verbose ./spec/reattempt-spec.js"
   },
   "main": "index.js",
@@ -28,6 +29,7 @@
   },
   "analyze": true,
   "devDependencies": {
+    "browserify": "^6.3.2",
     "jasmine-node": "https://github.com/mhevery/jasmine-node/tarball/Jasmine2.0",
     "proxyquire": "^1.0.1",
     "underscore": "^1.7.0"

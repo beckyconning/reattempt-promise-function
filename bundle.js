@@ -1,7 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports = require('./src/reattempt-promise-function');
-
-},{"./src/reattempt-promise-function":38}],2:[function(require,module,exports){
+!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.reattempt=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -51,7 +48,7 @@ Promise.prototype.any = function Promise$any() {
 
 };
 
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 (function (process){
 /**
  * The MIT License (MIT)
@@ -168,7 +165,7 @@ Async.prototype._reset = function Async$_reset() {
 module.exports = new Async();
 
 }).call(this,require('_process'))
-},{"./queue.js":26,"./schedule.js":29,"./util.js":36,"_process":39}],4:[function(require,module,exports){
+},{"./queue.js":25,"./schedule.js":28,"./util.js":35,"_process":36}],3:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -196,7 +193,7 @@ module.exports = new Async();
 "use strict";
 var Promise = require("./promise.js")();
 module.exports = Promise;
-},{"./promise.js":21}],5:[function(require,module,exports){
+},{"./promise.js":20}],4:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -319,7 +316,7 @@ Promise.prototype.get = function Promise$get(propertyName) {
 };
 };
 
-},{"./util.js":36}],6:[function(require,module,exports){
+},{"./util.js":35}],5:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -399,7 +396,7 @@ function Promise$fork(didFulfill, didReject, didProgress) {
 };
 };
 
-},{"./async.js":3,"./errors.js":11}],7:[function(require,module,exports){
+},{"./async.js":2,"./errors.js":10}],6:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -645,7 +642,7 @@ var captureStackTrace = (function stackDetection() {
 return CapturedTrace;
 };
 
-},{"./es5.js":13,"./util.js":36}],8:[function(require,module,exports){
+},{"./es5.js":12,"./util.js":35}],7:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -743,7 +740,7 @@ CatchFilter.prototype.doFilter = function CatchFilter$_doFilter(e) {
 return CatchFilter;
 };
 
-},{"./errors.js":11,"./es5.js":13,"./util.js":36}],9:[function(require,module,exports){
+},{"./errors.js":10,"./es5.js":12,"./util.js":35}],8:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -825,7 +822,7 @@ function Promise$thenThrow(reason) {
 };
 };
 
-},{"./util.js":36}],10:[function(require,module,exports){
+},{"./util.js":35}],9:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -863,7 +860,7 @@ Promise.each = function Promise$Each(promises, fn) {
 };
 };
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -1012,7 +1009,7 @@ module.exports = {
     canAttach: canAttach
 };
 
-},{"./es5.js":13,"./util.js":36}],12:[function(require,module,exports){
+},{"./es5.js":12,"./util.js":35}],11:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -1054,7 +1051,7 @@ function apiRejection(msg) {
 return apiRejection;
 };
 
-},{"./errors.js":11}],13:[function(require,module,exports){
+},{"./errors.js":10}],12:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -1145,7 +1142,7 @@ if (isES5) {
     };
 }
 
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -1183,7 +1180,7 @@ Promise.filter = function Promise$Filter(promises, fn, options) {
 };
 };
 
-},{}],15:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -1307,7 +1304,7 @@ Promise.prototype.tap = function Promise$tap(handler) {
 };
 };
 
-},{"./util.js":36}],16:[function(require,module,exports){
+},{"./util.js":35}],15:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -1462,7 +1459,7 @@ Promise.spawn = function Promise$Spawn(generatorFunction) {
 };
 };
 
-},{"./errors.js":11,"./util.js":36}],17:[function(require,module,exports){
+},{"./errors.js":10,"./util.js":35}],16:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -1588,7 +1585,7 @@ Promise.join = function Promise$Join() {
 
 };
 
-},{"./util.js":36}],18:[function(require,module,exports){
+},{"./util.js":35}],17:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -1741,7 +1738,7 @@ Promise.map = function Promise$Map(promises, fn, options, _filter) {
 
 };
 
-},{"./util.js":36}],19:[function(require,module,exports){
+},{"./util.js":35}],18:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -1821,7 +1818,7 @@ Promise.prototype.nodeify = function Promise$nodeify(nodeback, options) {
 };
 };
 
-},{"./async.js":3,"./util.js":36}],20:[function(require,module,exports){
+},{"./async.js":2,"./util.js":35}],19:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -1937,7 +1934,7 @@ function Promise$_progressUnchecked(progressValue) {
 };
 };
 
-},{"./async.js":3,"./errors.js":11,"./util.js":36}],21:[function(require,module,exports){
+},{"./async.js":2,"./errors.js":10,"./util.js":35}],20:[function(require,module,exports){
 (function (process){
 /**
  * The MIT License (MIT)
@@ -3037,7 +3034,7 @@ return Promise;
 };
 
 }).call(this,require('_process'))
-},{"./any.js":2,"./async.js":3,"./call_get.js":5,"./cancel.js":6,"./captured_trace.js":7,"./catch_filter.js":8,"./direct_resolve.js":9,"./each.js":10,"./errors.js":11,"./errors_api_rejection":12,"./filter.js":14,"./finally.js":15,"./generators.js":16,"./join.js":17,"./map.js":18,"./nodeify.js":19,"./progress.js":20,"./promise_array.js":22,"./promise_resolver.js":23,"./promisify.js":24,"./props.js":25,"./race.js":27,"./reduce.js":28,"./settle.js":30,"./some.js":31,"./synchronous_inspection.js":32,"./thenables.js":33,"./timers.js":34,"./using.js":35,"./util.js":36,"_process":39}],22:[function(require,module,exports){
+},{"./any.js":1,"./async.js":2,"./call_get.js":4,"./cancel.js":5,"./captured_trace.js":6,"./catch_filter.js":7,"./direct_resolve.js":8,"./each.js":9,"./errors.js":10,"./errors_api_rejection":11,"./filter.js":13,"./finally.js":14,"./generators.js":15,"./join.js":16,"./map.js":17,"./nodeify.js":18,"./progress.js":19,"./promise_array.js":21,"./promise_resolver.js":22,"./promisify.js":23,"./props.js":24,"./race.js":26,"./reduce.js":27,"./settle.js":29,"./some.js":30,"./synchronous_inspection.js":31,"./thenables.js":32,"./timers.js":33,"./using.js":34,"./util.js":35,"_process":36}],21:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -3243,7 +3240,7 @@ function PromiseArray$getActualLength(len) {
 return PromiseArray;
 };
 
-},{"./errors.js":11,"./util.js":36}],23:[function(require,module,exports){
+},{"./errors.js":10,"./util.js":35}],22:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -3405,7 +3402,7 @@ function PromiseResolver$_setCarriedStackTrace(trace) {
 
 module.exports = PromiseResolver;
 
-},{"./async.js":3,"./errors.js":11,"./es5.js":13,"./util.js":36}],24:[function(require,module,exports){
+},{"./async.js":2,"./errors.js":10,"./es5.js":12,"./util.js":35}],23:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -3735,7 +3732,7 @@ Promise.promisifyAll = function Promise$PromisifyAll(target, options) {
 };
 
 
-},{"./errors":11,"./promise_resolver.js":23,"./util.js":36}],25:[function(require,module,exports){
+},{"./errors":10,"./promise_resolver.js":22,"./util.js":35}],24:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -3847,7 +3844,7 @@ Promise.props = function Promise$Props(promises) {
 };
 };
 
-},{"./errors_api_rejection":12,"./es5.js":13,"./util.js":36}],26:[function(require,module,exports){
+},{"./errors_api_rejection":11,"./es5.js":12,"./util.js":35}],25:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -3966,7 +3963,7 @@ Queue.prototype._resizeTo = function Queue$_resizeTo(capacity) {
 
 module.exports = Queue;
 
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -4042,7 +4039,7 @@ Promise.prototype.race = function Promise$race() {
 
 };
 
-},{"./errors_api_rejection.js":12,"./util.js":36}],28:[function(require,module,exports){
+},{"./errors_api_rejection.js":11,"./util.js":35}],27:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -4227,7 +4224,7 @@ Promise.reduce = function Promise$Reduce(promises, fn, initialValue, _each) {
 };
 };
 
-},{"./util.js":36}],29:[function(require,module,exports){
+},{"./util.js":35}],28:[function(require,module,exports){
 (function (process){
 /**
  * The MIT License (MIT)
@@ -4294,7 +4291,7 @@ else throw new Error("no async scheduler available");
 module.exports = schedule;
 
 }).call(this,require('_process'))
-},{"_process":39}],30:[function(require,module,exports){
+},{"_process":36}],29:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -4365,7 +4362,7 @@ Promise.prototype.settle = function Promise$settle() {
 };
 };
 
-},{"./util.js":36}],31:[function(require,module,exports){
+},{"./util.js":35}],30:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -4530,7 +4527,7 @@ Promise.prototype.some = function Promise$some(howMany) {
 Promise._SomePromiseArray = SomePromiseArray;
 };
 
-},{"./errors.js":11,"./util.js":36}],32:[function(require,module,exports){
+},{"./errors.js":10,"./util.js":35}],31:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -4610,7 +4607,7 @@ Promise.prototype.isResolved = function Promise$isResolved() {
 Promise.PromiseInspection = PromiseInspection;
 };
 
-},{}],33:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -4747,7 +4744,7 @@ function Promise$_doThenable(x, then, originalPromise) {
 return Promise$_Cast;
 };
 
-},{"./errors.js":11,"./util.js":36}],34:[function(require,module,exports){
+},{"./errors.js":10,"./util.js":35}],33:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -4857,7 +4854,7 @@ Promise.prototype.timeout = function Promise$timeout(ms, message) {
 
 };
 
-},{"./errors.js":11,"./errors_api_rejection":12,"./util.js":36}],35:[function(require,module,exports){
+},{"./errors.js":10,"./errors_api_rejection":11,"./util.js":35}],34:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -5051,7 +5048,7 @@ module.exports = function (Promise, apiRejection, cast) {
 
 };
 
-},{"./errors.js":11,"./util.js":36}],36:[function(require,module,exports){
+},{"./errors.js":10,"./util.js":35}],35:[function(require,module,exports){
 /**
  * The MIT License (MIT)
  * 
@@ -5323,7 +5320,95 @@ var ret = {
 
 module.exports = ret;
 
-},{"./es5.js":13}],37:[function(require,module,exports){
+},{"./es5.js":12}],36:[function(require,module,exports){
+// shim for using process in browser
+
+var process = module.exports = {};
+
+process.nextTick = (function () {
+    var canSetImmediate = typeof window !== 'undefined'
+    && window.setImmediate;
+    var canMutationObserver = typeof window !== 'undefined'
+    && window.MutationObserver;
+    var canPost = typeof window !== 'undefined'
+    && window.postMessage && window.addEventListener
+    ;
+
+    if (canSetImmediate) {
+        return function (f) { return window.setImmediate(f) };
+    }
+
+    var queue = [];
+
+    if (canMutationObserver) {
+        var hiddenDiv = document.createElement("div");
+        var observer = new MutationObserver(function () {
+            var queueList = queue.slice();
+            queue.length = 0;
+            queueList.forEach(function (fn) {
+                fn();
+            });
+        });
+
+        observer.observe(hiddenDiv, { attributes: true });
+
+        return function nextTick(fn) {
+            if (!queue.length) {
+                hiddenDiv.setAttribute('yes', 'no');
+            }
+            queue.push(fn);
+        };
+    }
+
+    if (canPost) {
+        window.addEventListener('message', function (ev) {
+            var source = ev.source;
+            if ((source === window || source === null) && ev.data === 'process-tick') {
+                ev.stopPropagation();
+                if (queue.length > 0) {
+                    var fn = queue.shift();
+                    fn();
+                }
+            }
+        }, true);
+
+        return function nextTick(fn) {
+            queue.push(fn);
+            window.postMessage('process-tick', '*');
+        };
+    }
+
+    return function nextTick(fn) {
+        setTimeout(fn, 0);
+    };
+})();
+
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+// TODO(shtylman)
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+
+},{}],37:[function(require,module,exports){
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
@@ -6222,92 +6307,5 @@ var reattempt = T.func([ T.Func, T.Arr, T.Num, T.Num ], PromiseType)
 
 module.exports = reattempt;
 
-},{"bluebird":4,"tcomb":37}],39:[function(require,module,exports){
-// shim for using process in browser
-
-var process = module.exports = {};
-
-process.nextTick = (function () {
-    var canSetImmediate = typeof window !== 'undefined'
-    && window.setImmediate;
-    var canMutationObserver = typeof window !== 'undefined'
-    && window.MutationObserver;
-    var canPost = typeof window !== 'undefined'
-    && window.postMessage && window.addEventListener
-    ;
-
-    if (canSetImmediate) {
-        return function (f) { return window.setImmediate(f) };
-    }
-
-    var queue = [];
-
-    if (canMutationObserver) {
-        var hiddenDiv = document.createElement("div");
-        var observer = new MutationObserver(function () {
-            var queueList = queue.slice();
-            queue.length = 0;
-            queueList.forEach(function (fn) {
-                fn();
-            });
-        });
-
-        observer.observe(hiddenDiv, { attributes: true });
-
-        return function nextTick(fn) {
-            if (!queue.length) {
-                hiddenDiv.setAttribute('yes', 'no');
-            }
-            queue.push(fn);
-        };
-    }
-
-    if (canPost) {
-        window.addEventListener('message', function (ev) {
-            var source = ev.source;
-            if ((source === window || source === null) && ev.data === 'process-tick') {
-                ev.stopPropagation();
-                if (queue.length > 0) {
-                    var fn = queue.shift();
-                    fn();
-                }
-            }
-        }, true);
-
-        return function nextTick(fn) {
-            queue.push(fn);
-            window.postMessage('process-tick', '*');
-        };
-    }
-
-    return function nextTick(fn) {
-        setTimeout(fn, 0);
-    };
-})();
-
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-// TODO(shtylman)
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-
-},{}]},{},[1]);
+},{"bluebird":3,"tcomb":37}]},{},[38])(38)
+});
