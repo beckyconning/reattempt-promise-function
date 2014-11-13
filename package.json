@@ -14,7 +14,7 @@
     "build": "./node_modules/browserify/bin/cmd.js ./src/reattempt-promise-function.js --standalone reattempt > ./bundle.js",
     "test": "./node_modules/.bin/jasmine-node --verbose ./spec/reattempt-spec.js"
   },
-  "main": "index.js",
+  "main": "./src/reattempt-promise-function.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/beckyconning/reattempt-promise-function"
