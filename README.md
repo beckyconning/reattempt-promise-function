@@ -60,5 +60,50 @@ reattempt(requestPromise, [requestOptions], 250, 10)
     });
 ```
 
+## Caveats
+
+If the function you want to reattempt contains references to `this` make sure you
+bind the required value of `this` to it before passing it to `reattempt`.
+
+```javascript
+var Food = function (name, sodium) { 
+    this.name = name; 
+    this.sodium = sodium;
+};
+
+Food.prototype.getSummary = function () {
+    if (typeof this.name !== 'undefined' && typeof this.sodium !== undefined) {
+        var summary = this.name + ' contains ' + this.sodium + 'g of sodium per 100g.'
+        return Promise.resolve(summary);
+    } else {
+        return Promise.reject('Sorry there was nothing to summarise.'); 
+    }
+};
+
+var strawberryJam = new Food('Stawberry jam', 0.2);
+
+// The following is attempted 10 times with a 250ms delay between each attempt before
+// being rejected.
+reattempt(strawberryJam.getSummary, [], 250, 10).then(function (summary) {
+    console.log(summary);
+}).catch(function (error) {
+    console.log(error);
+});
+
+var getStrawberryJamSummary = strawberryJam.getSummary.bind(strawberryJam);
+
+// The following resolves immediately.
+reattempt(getStrawberryJamSummary, [], 250, 10).then(function (summary) {
+    console.log(summary);
+}).catch(function (error) {
+    console.log(error);
+});
+```
+
+For more information on `Function.prototype.bind()` please see [the MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+
 ## Testing
 Use `npm test` to run the unit tests.
+
+## Building
+Use `npm run build` to build the `bundle.js` which can be used with CommonJS, AMD or a normal browser.
