@@ -99,7 +99,7 @@ reattempt(getStrawberryJamSummary, [], 250, 10).then(function (summary) {
 });
 ```
 
-For more information on `Function.prototype.bind()` please see [the MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+For more information about `Function.prototype.bind()` please see [the MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
 
 ## Testing
 Use `npm test` to run the unit tests.
