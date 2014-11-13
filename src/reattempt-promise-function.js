@@ -9,7 +9,7 @@ var reattempt = T.func([ T.Func, T.Arr, T.Num, T.Num ], PromiseType)
             return reattempt(promiseFunction, args, delay, attemptsLeft - 1);
         };
 
-        return Promise.resolve(promiseFunction.apply(promiseFunction, args))
+        return Promise.resolve(promiseFunction.apply(null, args))
             .catch(function (rejectValue) {
                 if (attemptsLeft <= 1) return Promise.reject(rejectValue);
                 else return Promise.delay(delay).then(nextAttempt);
