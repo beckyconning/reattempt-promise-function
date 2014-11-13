@@ -81,6 +81,7 @@ Food.prototype.getSummary = function () {
 };
 
 var strawberryJam = new Food('Stawberry jam', 0.2);
+var getStrawberryJamSummary = strawberryJam.getSummary.bind(strawberryJam);
 
 // The following is attempted 10 times with a 250ms delay between each attempt before
 // being rejected.
@@ -89,8 +90,6 @@ reattempt(strawberryJam.getSummary, [], 250, 10).then(function (summary) {
 }).catch(function (error) {
     console.log(error);
 });
-
-var getStrawberryJamSummary = strawberryJam.getSummary.bind(strawberryJam);
 
 // The following resolves immediately.
 reattempt(getStrawberryJamSummary, [], 250, 10).then(function (summary) {
