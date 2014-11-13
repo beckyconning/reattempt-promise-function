@@ -106,4 +106,4 @@ For more information on `Function.prototype.bind()` please see [the MDN document
 Use `npm test` to run the unit tests.
 
 ## Building
-Use `npm run build` to build the `bundle.js` which can be used with CommonJS, AMD or a normal browser.
+Use `npm run build` to build the `bundle.js`.
