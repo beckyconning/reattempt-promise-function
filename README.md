@@ -13,9 +13,34 @@ disconnected.
 
 ## Quickstart
 
+### Node
+
+```sh
+npm install https://github.com/beckyconning/reattempt-promise-function/tarball/master --save
+```
+
+```javascript
+var reattempt = require('reattempt-promise-function');
+reattempt(promiseFunction, arguments, delayBetweenAttempts, numberOfAttempts);
+```
+
+### Simple browser
+
+```sh
+bower install https://github.com/beckyconning/reattempt-promise-function/tarball/master --save
+```
+
+```html
+<script src="bower_components/reattempt-promise-function/bundle.js"></script>
+```
+
 ```javascript
 reattempt(promiseFunction, arguments, delayBetweenAttempts, numberOfAttempts);
 ```
+
+### Other options
+
+You can also use `bundle.js` with Browserify / CommonJS / AMD.
 
 ## Example
 
