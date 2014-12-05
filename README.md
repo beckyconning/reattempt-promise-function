@@ -16,7 +16,7 @@ disconnected.
 ### Node
 
 ```sh
-npm install https://github.com/beckyconning/reattempt-promise-function/tarball/master --save
+npm install reattempt-promise-function
 ```
 
 ```javascript
@@ -24,7 +24,7 @@ var reattempt = require('reattempt-promise-function');
 reattempt(promiseFunction, arguments, delayBetweenAttempts, numberOfAttempts);
 ```
 
-### Simple browser
+### Browser
 
 ```sh
 bower install https://github.com/beckyconning/reattempt-promise-function/tarball/master --save
@@ -66,8 +66,8 @@ If the function you want to reattempt contains references to `this` make sure yo
 bind the required value of `this` to it before passing it to `reattempt`.
 
 ```javascript
-var Food = function (name, sodium) { 
-    this.name = name; 
+var Food = function (name, sodium) {
+    this.name = name;
     this.sodium = sodium;
 };
 
@@ -76,15 +76,15 @@ Food.prototype.getSummary = function () {
         var summary = this.name + ' contains ' + this.sodium + 'g of sodium per 100g.'
         return Promise.resolve(summary);
     } else {
-        return Promise.reject('Sorry there was nothing to summarise.'); 
+        return Promise.reject('Sorry there was nothing to summarise.');
     }
 };
 
 var strawberryJam = new Food('Stawberry jam', 0.2);
 var getStrawberryJamSummary = strawberryJam.getSummary.bind(strawberryJam);
 
-// The following is attempted 10 times with a 250ms delay between each attempt before
-// being rejected.
+// The following is attempted 10 times with a 250ms delay between each attempt
+// before being rejected.
 reattempt(strawberryJam.getSummary, [], 250, 10).then(function (summary) {
     console.log(summary);
 }).catch(function (error) {
@@ -99,7 +99,7 @@ reattempt(getStrawberryJamSummary, [], 250, 10).then(function (summary) {
 });
 ```
 
-For more information about `Function.prototype.bind()` please see [the MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+For more information about `Function.prototype.bind()` please see [the MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
 
 ## Testing
 Use `npm test` to run the unit tests.
