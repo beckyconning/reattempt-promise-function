@@ -116,7 +116,7 @@ describe('reattempt-promise-function', function () {
                 var timeAfter = new Date().getTime();
                 var duration = timeAfter - timeBefore;
                 expect(duration).toBeGreaterThan(expectedDuration - 1);
-                expect(duration).toBeLessThan(expectedDuration + 5);
+                expect(duration).toBeLessThan(expectedDuration + 20);
                 done();
             });
     });

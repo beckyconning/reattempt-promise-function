@@ -23,12 +23,11 @@
     "promise",
     "gulp"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "analyze": true,
   "devDependencies": {
-    "browserify": "^6.3.2",
-    "jasmine-node": "https://github.com/mhevery/jasmine-node/tarball/Jasmine2.0",
+    "browserify": "^16.2.3",
+    "jasmine-node": "https://github.com/beckyconning/jasmine-node/tarball/Jasmine2.0",
     "proxyquire": "^1.0.1",
     "underscore": "^1.7.0"
   },
