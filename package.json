@@ -1,7 +1,7 @@
 {
   "name": "reattempt-promise-function",
   "preferGlobal": false,
-  "version": "0.0.6",
+  "version": "1.0.0",
   "author": "Software Co-operative Ltd <becky.conning@icloud.com>",
   "description": "Reattempt function calls that return promises when those promises reject.",
   "contributors": [
@@ -21,7 +21,13 @@
   },
   "keywords": [
     "promise",
-    "gulp"
+    "gulp",
+    "grunt",
+    "http",
+    "retry",
+    "reattempt",
+    "timeout",
+    "delay"
   ],
   "dependencies": {},
   "analyze": true,
