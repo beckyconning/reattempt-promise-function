@@ -24,8 +24,6 @@
     "gulp"
   ],
   "dependencies": {
-    "bluebird": "^2.3.11",
-    "tcomb": "^0.3.2"
   },
   "analyze": true,
   "devDependencies": {

@@ -1,5 +1,4 @@
 describe('reattempt-promise-function', function () {
-    var Promise   = require('bluebird');
     var reattempt = require('../src/reattempt-promise-function');
 
     var delay    = 5;

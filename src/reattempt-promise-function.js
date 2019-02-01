@@ -1,19 +1,21 @@
-var Promise = require('bluebird');
-var T       = require('tcomb');
+var delay = function (duration) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve();
+    }, duration);
+  });
+};
 
-var PromiseType = T.subtype(T.Obj, function (o) { return o instanceof Promise; });
+var reattempt = function (promiseFunction, args, delayDuration, attemptsLeft) {
+  var nextAttempt = function () {
+    return reattempt(promiseFunction, args, delayDuration, attemptsLeft - 1);
+  };
 
-var reattempt = T.func([ T.Func, T.Arr, T.Num, T.Num ], PromiseType)
-    .of(function (promiseFunction, args, delay, attemptsLeft) {
-        var nextAttempt = function () {
-            return reattempt(promiseFunction, args, delay, attemptsLeft - 1);
-        };
-
-        return Promise.resolve(promiseFunction.apply(null, args))
-            .catch(function (rejectValue) {
-                if (attemptsLeft <= 1) return Promise.reject(rejectValue);
-                else return Promise.delay(delay).then(nextAttempt);
-            });
+  return Promise.resolve(promiseFunction.apply(null, args))
+    .catch(function (rejectValue) {
+        if (attemptsLeft <= 1) return Promise.reject(rejectValue);
+        else return delay(delayDuration).then(nextAttempt);
     });
+};
 
-module.exports = reattempt;
+module.exports = reattempt; 
